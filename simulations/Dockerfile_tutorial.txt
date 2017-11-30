@@ -1,0 +1,16 @@
+# Start with the LSST image as a base
+FROM lsstsqre/centos:7-stack-lsst_distrib-v13_0
+
+# Install Pip, which will be used to install other software
+RUN curl https://bootstrap.pypa.io/get-pip.py | sudo python -
+
+# Install python-devel, needed for some of the modules
+RUN sudo yum install -y python-devel
+
+# Install Jupyter itself
+RUN sudo pip install jupyter
+
+# Install Python modules needed by the notebooks in the tutorial
+RUN sudo pip install matplotlib
+RUN sudo pip install astropy
+RUN sudo pip install sncosmo

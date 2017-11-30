@@ -1,0 +1,5 @@
+# Start with original tutorial image (LSST + Jupyter) as a base
+FROM jamespepcc/lssttutorial:1.0
+
+# Install LSST simulation software
+RUN sudo bash -c "source /opt/lsst/software/stack/loadLSST.bash ; eups distrib install lsst_sims -t sims"

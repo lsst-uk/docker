@@ -1,0 +1,5 @@
+# Start with version 1.0 of the simulations image
+FROM jamespepcc/lsstsimulations:1.0
+
+# Install usable version of Jupyter
+RUN sudo bash -c "source /opt/lsst/software/stack/loadLSST.bash ; conda install jupyter"
