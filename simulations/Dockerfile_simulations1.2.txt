@@ -1,0 +1,10 @@
+# Start with the LSST image as a base
+FROM jamespepcc/lsstbase:1.1
+
+# Install the LSST simulation software
+RUN bash -c "source /opt/lsst/loadLSST.bash ; eups distrib install lsst_sims -t sims"
+
+# Install usable version of Jupyter
+RUN bash -c "source /opt/lsst/loadLSST.bash ; conda install jupyter"
+
+CMD ["/bin/bash"]

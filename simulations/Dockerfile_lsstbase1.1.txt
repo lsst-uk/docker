@@ -1,0 +1,18 @@
+# Start with CentOS as a base
+FROM erixero/centos7.3-base-image
+
+# install dependencies
+RUN yum install -y bison curl blas bzip2-devel bzip2 flex fontconfig freetype-devel gcc-c++ gcc-gfortran git libuuid-devel libXext libXrender libXt-devel make openssl-devel patch perl readline-devel tar zlib-devel ncurses-devel cmake glib2-devel java-1.8.0-openjdk gettext perl-ExtUtils-MakeMaker which
+
+# create lsst user and directory
+RUN useradd -ms /bin/bash lsst
+RUN mkdir /opt/lsst
+RUN chown lsst:lsst /opt/lsst
+
+USER lsst
+WORKDIR /opt/lsst
+RUN wget https://raw.githubusercontent.com/lsst/lsst/master/scripts/newinstall.sh
+RUN bash newinstall.sh -b
+
+# actually install lsst software
+RUN bash -c "source /opt/lsst/loadLSST.bash ; eups distrib install -t v14_0 lsst_distrib"
